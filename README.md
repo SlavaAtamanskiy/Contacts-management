@@ -2,4 +2,7 @@
 Contacts management mechanism for APEX ORACLE applications
 
 Download [demo app](https://github.com/SlavaAtamanskiy/Contacts-management/blob/master/example/app.sql)
+
 Download [demo metadata](https://github.com/SlavaAtamanskiy/Contacts-management/blob/master/example/metadata.sql)
+
+Download [contacts management package](https://github.com/SlavaAtamanskiy/Contacts-management/blob/master/ddl/package.sql)

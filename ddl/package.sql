@@ -89,7 +89,7 @@ PROCEDURE insert_contacts (
              dbms_output.put_line(query_string);
              EXECUTE IMMEDIATE query_string USING v_contacts, p_sequence_val, v_key, v_val;
 
-         END LOOP;
+        END LOOP;
 
 END insert_contacts;
 
@@ -302,24 +302,14 @@ FUNCTION replace_forbidden_symbols (
        p_value IN VARCHAR2) RETURN VARCHAR2
  IS
 
-v_specialSymbols varchar2(50) := q'#\'"#';
-v_symb varchar2(1);
-i int := 0;
-v_result varchar2(500):= p_value;
+v_forbidden varchar2(50) := q'#\'"#';
+v_scope varchar2(60);
+v_result varchar2(500):= '';
 
 BEGIN
 
-    WHILE i <= length(v_specialSymbols) LOOP
-
-           v_symb := SUBSTR(v_specialSymbols, i, 1);
-           if INSTR(v_result, v_symb) > 0 and INSTR(v_specialSymbols, v_symb) > 0 then
-               v_result := REPLACE(v_result, v_symb, ' ');
-               --dbms_output.put_line(v_result);
-           end if;
-           i:= i+1;
-
-    END LOOP;
-
+   v_scope := '['||v_forbidden||']';
+   v_result:= regexp_replace(regexp_replace(p_value, v_scope, ''), ' {2,}', ' ');
    v_result:= ''||v_result||'';
 
    return v_result;
